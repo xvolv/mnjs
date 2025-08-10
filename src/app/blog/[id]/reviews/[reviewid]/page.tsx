@@ -1,15 +1,18 @@
+import { notFound } from "next/navigation";
 import React from "react";
-type props = {
+type Props = {
   params: Promise<{ id: string; reviewid: string }>;
 };
-const page = async ({ params }: props) => {
-  const { id } = await params;
-  const { reviewid } = await params;
+const Page = async ({ params }: Props) => {
+  const { id, reviewid } = await params;
+
+  if (Number(reviewid) > 100) {
+    notFound(); // immediately throws and renders 404 page
+  }
   return (
     <div>
-      blog {id} reviewid {reviewid}{" "}
+      blog {id} reviewid {reviewid}
     </div>
   );
 };
-
-export default page;
+export default Page;
